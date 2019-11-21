@@ -1,0 +1,63 @@
+## WORKING SETTINGS FILE
+##
+## This file contains settings for the compiled bous_therm model. It is read by
+## a combination of functions in the bous_therm_io and bous_therm_settings
+## source files. Unrecognized settings will cause an error. When running
+## the model, the path to this or another settings file is the second
+## command line input (first is grid directory, third is output directory).
+## Not all physical parameters are defined here. Parameters less likely to
+## change are preprocessor macros in the bous_therm_param.hpp header. If a
+## setting that the model is expecting from this file goes undefined, it may
+## cause weird behavior or errors. There are no default values compiled into
+## the model for the settings in this file.
+
+#-------------------------------------------------------------------------------
+# MODEL SET UP AND INTEGRATION
+
+#number of steps to run
+nstep = 1e2
+
+#duration of solve (year is 31557600)
+tend = 1e0
+
+#time unit to use (number of seconds)
+tunit = 31557600
+
+#number of snaps to take
+nsnap = 5
+
+#max length of output arrays that capture every time step (subsample if < nstep)
+nmaxout = 1e4
+
+#-------------------------------------------------------------------------------
+# PHYSICAL PARAMETERS
+
+# initial depth of the water table (meters)
+Hdep0 = 0
+
+# toggle max recharge, which artificially keeps the water table at the surface
+Rmax = 1
+
+# porosity (unitless) in the form poro0*exp(-depth/poro1)
+poro0   = 0.2
+porogam = 2500
+
+# permeability (m^2) in the form perm0*exp(-depth/perm1)
+perm0   = 1e-12
+permgam = 2000
+
+# thermal conductivity (W/m*Kelvin) of rock
+kTr = 3
+
+# geothermal heat flux (W/m^2)
+fTgeo = 0.04
+
+# surface temperature settings
+#initial surface temp at deepest point (K)
+Ts0   = 220
+#final surface temp at deepest point (K)
+Tsf   = 285
+#exponential decay time for temperature transition (conscious of tunit)
+Tsgam = 0.1
+#lapse rate (K/m)
+TsLR  = 0.025

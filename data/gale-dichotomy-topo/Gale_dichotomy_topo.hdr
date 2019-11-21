@@ -1,0 +1,15 @@
+ENVI
+description = {
+C:\Users\mab0328\Documents\research\hydrothermal\Gale-dichotomy-topo\Gale_dichotomy_topo.img}
+samples = 3506
+lines   = 7011
+bands   = 1
+header offset = 0
+file type = ENVI Standard
+data type = 2
+interleave = bsq
+byte order = 0
+map info = {Equirectangular, 1, 1, -3318734.3008, 344977.9621, 463.057667199087, 463.057667208672}
+coordinate system string = {PROJCS["Equidistant_Cylindrical",GEOGCS["GCS_unnamed ellipse",DATUM["D_unknown",SPHEROID["Unknown",3396000,0]],PRIMEM["Greenwich",0],UNIT["Degree",0.017453292519943295]],PROJECTION["Equidistant_Cylindrical"],PARAMETER["central_meridian",180],PARAMETER["false_easting",0],PARAMETER["false_northing",0],UNIT["Meter",1]]}
+band names = {
+Band 1}

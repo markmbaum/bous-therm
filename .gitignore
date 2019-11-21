@@ -1,0 +1,53 @@
+# ------------------------------------------------------------------------------
+# general
+
+# Python
+*.pyc
+__pycache__/
+.ipynb_checkpoints
+
+# Word, Excel backups
+*.xlk
+*.wbk
+
+# MATLAB
+*.m~
+._*
+~$*
+
+# Mac thing
+**/.DS_Store
+
+# Other
+Thumbs.db
+#.git*
+
+# ------------------------------------------------------------------------------
+# specific
+
+# Links
+*.lnk
+
+# Archive
+arch/*
+
+# Results
+results/*
+
+# Plots
+plots/*
+
+# Binary files
+bin/*
+obj/*
+
+# Output files
+out/*
+
+# References/documents, some of which probably shouldn't be distributed without permission
+ref/*
+
+# Makefile configuration
+config.mk
+
+!**/.keep

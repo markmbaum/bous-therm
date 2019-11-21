@@ -1,0 +1,32 @@
+#!/bin/bash
+#SBATCH -p shared       #partition
+#SBATCH -N 1                #number of computing nodes
+#SBATCH -c 16               #number of cores/cpus
+#SBATCH -t 1-00:00          #time limit
+#SBATCH --mem-per-cpu=900   #memory per cpu/core (MB)
+#SBATCH -o %j.out           #output file
+#SBATCH -e %j.err           #error file
+
+: '
+This script is for farming out a single bous_therm run.
+Just like the model itself, it requires the grid directory,
+a settings file, and an output directory. The model needs to be
+compiled and the grid files need to be in place before submitting
+this job.
+'
+
+#modules
+module purge
+module load intel
+
+#input and output
+bindir=$1   #directory with bous_therm.exe
+griddir=$2  #directory with grid files
+settings=$3 #path to settings text file
+outdir=$4   #output directory
+
+#max number of threads
+export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+
+#run the model
+srun -c $SLURM_CPUS_PER_TASK ${bindir}/bous_therm.exe $griddir $settings $outdir
