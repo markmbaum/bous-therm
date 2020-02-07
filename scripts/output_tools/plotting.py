@@ -37,6 +37,8 @@ def plot_temperature(trial, grid, Tlim=27, H=False, xmin=-inf, xmax=inf):
         xmax - upper lim of domain to plot"""
 
     #make subplots
+    trial.T = trial.T[::2]
+    trial.snap_t = trial.snap_t[::2]
     N = len(trial.T)
     fig, axs = plt.subplots(N, 1)
     fig.subplots_adjust(hspace=0.05)
@@ -63,8 +65,8 @@ def plot_temperature(trial, grid, Tlim=27, H=False, xmin=-inf, xmax=inf):
         z = grid.zc.copy()
         X, Z = meshgrid(x, z)
         Z = add(Z, grid.ztope)
-        xr = linspace(max([xmin, X.min()]), min([xmax, X.max()]), 2500)
-        zr = linspace(Z.min(), Z.max(), 500)
+        xr = linspace(max([xmin, X.min()]), min([xmax, X.max()]), 2000)
+        zr = linspace(Z.min(), Z.max(), 300)
         Xr, Zr = meshgrid(xr, zr)
         Tr = griddata(
             (X.flatten(), Z.flatten()),
@@ -78,12 +80,15 @@ def plot_temperature(trial, grid, Tlim=27, H=False, xmin=-inf, xmax=inf):
                 if Zr[j,k] > zz or Zr[j,k] < zz + grid.ze.min():
                     Tr[j,k] = nan
 
-        r = axs[i].pcolormesh(Xr/DU, -Zr/DU, Tr,# shading='gouraud',
+        r = axs[i].pcolormesh(xr/DU, zr/DU, Tr,# shading='gouraud',
                 cmap='RdBu_r', vmin=vmin, vmax=vmax)
+        axs[i].plot(xr/DU, interp(xr, grid.xe, grid.ztope)/DU, 'k', alpha=0.5)
+        axs[i].plot(xr/DU, (interp(xr, grid.xe, grid.ztope) + grid.ze.min())/DU, 'k', alpha=0.5)
         if H:
             axs[i].plot(grid.xc/DU, (grid.ztopc - trial.H[i])/DU, 'r')
-        axs[i].contour(Xr/DU, -Zr/DU, Tr, levels=[273], colors='k', linewidths=0.5)
-        axs[i].invert_yaxis()
+        axs[i].contour(xr/DU, zr/DU, Tr,
+                levels=[273], colors='k', linewidths=0.5)
+        #axs[i].invert_yaxis()
         axs[i].text(0.01, 0.01, '{:,g} {}'.format(trial.snap_t[i]/TU, TL),
                 ha='left', va='bottom', transform=axs[i].transAxes)
         if i != N-1:
@@ -95,7 +100,7 @@ def plot_temperature(trial, grid, Tlim=27, H=False, xmin=-inf, xmax=inf):
     fig.text(0.5, 0.04, 'Horizontal Extent (%s)' % DL, ha='center')
     fig.text(0.04, 0.5, 'Elevation (%s)' % DL, va='center', rotation='vertical')
 
-    return(axs)
+    return(fig, axs)
 
 def plot_context(trial, grid, legend=False, Tlim=27):
     """Makes a three panel plot showing T and H snaps for a single trial

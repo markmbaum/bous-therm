@@ -13,7 +13,7 @@ flags=-std=c++11 -Wall -Wextra -pedantic -O3 # <--- GNU compiler flags
 
 #compilation flag for openmp
 omp=-fopenmp
-#comp=-qopenmp
+#omp=-qopenmp
 
 #top directory of ode library for solver classes (libode)
 odepath=<path/to/libode>

@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 #plt.rc('font', family='calibri')
 #plt.rc('font', size=18)
 
-from output import *
+from output_tools import *
 
 #-------------------------------------------------------------------------------
 #INPUTS
