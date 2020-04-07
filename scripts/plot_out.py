@@ -12,7 +12,7 @@ from output_tools import *
 gdir = join('..', 'results', 'grid')
 
 #results directory
-tdir = join('..', 'results', 'batch-runs', '114')
+tdir = join('..', 'out')
 
 #-------------------------------------------------------------------------------
 #MAIN

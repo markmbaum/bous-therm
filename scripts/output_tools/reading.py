@@ -165,7 +165,7 @@ class Grid:
 
 class Trial:
 
-    def __init__(self, tdir, gdir):
+    def __init__(self, tdir, gdir, fnset=None):
 
         Nx = read_grid_num(gdir, 'Nx', int)
         Nz = read_grid_num(gdir, 'Nz', int)
@@ -200,7 +200,17 @@ class Trial:
         self.o_minaqbot = join_read(tdir, 'o_minaqbot')
         self.o_t = join_read(tdir, 'o_t')
 
-        self.set = read_settings(join(tdir, 'settings.txt'))
+        self.set = None
+        if fnset is not None:
+            try:
+                self.set = read_settings(fnset)
+            except FileNotFoundError:
+                print('settings file "%s" not found' % fnset)
+        else:
+            try:
+                self.set = read_settings(join(tdir, 'settings.txt'))
+            except FileNotFoundError:
+                pass
 
     @property
     def nsnap(self):

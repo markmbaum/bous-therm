@@ -15,10 +15,10 @@
 # MODEL SET UP AND INTEGRATION
 
 #number of steps to run
-nstep = 1e2
+nstep = 1e4
 
 #duration of solve (year is 31557600)
-tend = 1e0
+tend = 1e1
 
 #time unit to use (number of seconds)
 tunit = 31557600
@@ -36,7 +36,7 @@ nmaxout = 1e4
 Hdep0 = 0
 
 # toggle max recharge, which artificially keeps the water table at the surface
-Rmax = 1
+Rmax = 0
 
 # porosity (unitless) in the form poro0*exp(-depth/poro1)
 poro0   = 0.2
